@@ -1,0 +1,8 @@
+docker pull store/internetsystemsconsortium/bind9:9.16
+
+
+
+
+docker run -d imageID
+
+docker exec -u 0 -it mycontainer bash (run docker in root)
