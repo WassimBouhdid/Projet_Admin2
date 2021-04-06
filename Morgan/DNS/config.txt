@@ -1,7 +1,4 @@
-docker pull store/internetsystemsconsortium/bind9:9.16
-
-
-
+docker build -t custom/img:bind9resolver ./
 
 docker run -d imageID
 
