@@ -10,7 +10,7 @@ RUN apt-get update && \
 apt-get -y install sudo
 
 #https://community.asterisk.org/t/itu-t-telephone-code-and-docker/77303
-RUN DEBIAN_FRONTEND=noninteractive
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo && \
 apt -y install net-tools && \
@@ -32,11 +32,11 @@ contrib/scripts/get_mp3_source.sh && \
 contrib/scripts/install_prereq install
 
 #build and install Asterisk on ubuntu
-RUN ./configure && \
-make && \
-make install && \
-make samples && \
-make progdocs && \
+RUN ./configure
+RUN make
+RUN make install
+RUN make samples
+RUN make progdocs
 #make config
 
 
