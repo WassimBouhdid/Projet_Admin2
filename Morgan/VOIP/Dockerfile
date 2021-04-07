@@ -5,6 +5,10 @@ FROM ubuntu:20.04
 #basic config
 RUN apt-get update
 RUN apt-get upgrade -y 
+RUN apt-get update && \
+      apt-get -y install sudo
+
+RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
 RUN apt -y install net-tools 
 RUN apt -y install iputils-ping 
 RUN apt -y install nano 
@@ -24,9 +28,10 @@ RUN apt policy asterisk
 RUN cd ~ 
 RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz 
 RUN tar xvf asterisk-18-current.tar.gz 
-RUN cd asterisk-18*/ 
-#RUN contrib/scripts/get_mp3_source.sh 
-#RUN contrib/scripts/install_prereq install
+RUN cd asterisk-18*/
+RUN ls -al 
+RUN ./contrib/scripts/get_mp3_source.sh 
+RUN sudo contrib/scripts/install_prereq install
 
 #build and install Asterisk 18 on ubuntu 20.04
 RUN ./configure 
