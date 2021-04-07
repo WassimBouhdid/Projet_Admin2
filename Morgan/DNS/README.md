@@ -1,5 +1,9 @@
-docker build -t custom/img:bind9resolver ./
+`CD` to correct directory
 
-docker run -d imageID
+`docker build -t custom/img:bind9resolver ./`
 
-docker exec -u 0 -it mycontainer bash (run docker in root)
+`docker image ls` > get imageID
+
+`docker run -d imageID` > -d run in background
+
+`docker exec -u 0 -it mycontainer bash` > run docker in root
