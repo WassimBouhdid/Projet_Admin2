@@ -1,3 +1,5 @@
+Test
+
 `CD` to correct directory
 
 `docker build -t custom/img:bind9resolver ./`
