@@ -3,7 +3,7 @@
 FROM ubuntu:20.04
 
 #basic config
-RUN apt-get update -y \
+RUN apt-get update\
 apt-get upgrade -y \
 apt -y install net-tools \
 apt -y install iputils-ping \
