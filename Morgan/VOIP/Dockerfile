@@ -3,8 +3,8 @@
 FROM ubuntu:20.04
 
 #basic config
-RUN apt -y update 
-apt -y upgrade
+RUN apt-get update -y 
+apt-get upgrade -y
 apt -y install net-tools
 apt -y install iputils-ping
 apt -y install nano
