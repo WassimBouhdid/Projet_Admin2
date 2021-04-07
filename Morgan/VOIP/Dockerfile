@@ -5,9 +5,10 @@ RUN apt-get update -y
 RUN apt-get install -y net-tools
 RUN apt-get install -y iputils-ping
 RUN apt-get install -y nano
+RUN apt-get install -y apt-utils
 RUN echo "Europe/Brussels" | tee /etc/timezone
 #asterisk install dependance
-RUN sudo apt install build-essential libxml2-dev libncurses5-dev linux-headers-`uname -r` libsqlite3-dev libssl-dev libedit-dev uuid-dev libjansson-dev
+RUN apt install build-essential libxml2-dev libncurses5-dev linux-headers-`uname -r` libsqlite3-dev libssl-dev libedit-dev uuid-dev libjansson-dev
 
 #download latest 18 version of asterisk
 RUN mkdir /usr/src/asterisk
