@@ -1,25 +1,42 @@
+#source : https://computingforgeeks.com/how-to-install-asterisk-17-on-ubuntu/
+
 FROM ubuntu:20.04
 
 #basic config
-RUN apt-get update -y
-RUN apt-get install -y net-tools
-RUN apt-get install -y iputils-ping
-RUN apt-get install -y nano
-RUN apt-get install -y apt-utils
-RUN echo "Europe/Brussels" | tee /etc/timezone
-#asterisk install dependance
-RUN apt install build-essential libxml2-dev libncurses5-dev linux-headers-`uname -r` libsqlite3-dev libssl-dev libedit-dev uuid-dev libjansson-dev
+RUN apt -y update 
+apt -y upgrade
+apt -y install net-tools
+apt -y install iputils-ping
+apt -y install nano
+apt -y install apt-utils
+echo "Europe/Brussels" | tee /etc/timezone
 
-#download latest 18 version of asterisk
-RUN mkdir /usr/src/asterisk
-RUN cd /usr/src/asterisk
-RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
-RUN tar -xvzf asterisk-18-current.tar.gz
-RUN cd asterisk-18.0.3 
-RUN ./configure --with-jansson-bundled
-RUN make menuselect
+#install build dependencies
+RUN apt update
+add-apt-repository universe
+apt -y install git curl wget libnewt-dev libssl-dev libncurses5-dev subversion libsqlite3-dev build-essential libjansson-dev libxml2-dev  uuid-dev
 
+
+#download asterisk 18 tarball
+RUN apt policy asterisk
+cd ~
+wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
+tar xvf asterisk-18-current.tar.gz
+cd asterisk-18*/
+contrib/scripts/get_mp3_source.sh
+contrib/scripts/install_prereq install
+
+#build and install Asterisk 18 on ubuntu 20.04
+RUN ./configure
+make
+make install
+make samples
+make progdocs
+make config
 
 #ports
 EXPOSE 2060/udp
 EXPOSE 2060/tcp
+
+#run asterisk 18
+CMD ["asterisk"]
