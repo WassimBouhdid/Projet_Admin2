@@ -10,6 +10,7 @@ RUN apt-get update && \
 apt-get -y install sudo
 
 #https://community.asterisk.org/t/itu-t-telephone-code-and-docker/77303
+ENV DEBIAN_FRONTEND=noninteractive
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo && \
@@ -36,7 +37,6 @@ RUN ./configure
 RUN make
 RUN make install
 RUN make samples
-RUN make progdocs
 #make config
 
 
