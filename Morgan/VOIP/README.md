@@ -1,1 +1,1 @@
-docker build -t custom/img:asterisk ./
+`docker build -t custom/img:asterisk ./`
