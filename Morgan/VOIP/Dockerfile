@@ -1,5 +1,5 @@
-#source : https://computingforgeeks.com/how-to-install-asterisk-17-on-ubuntu/
-#source : https://www.howtoforge.com/how-to-install-asterisk-17-on-ubuntu-2004/
+#source add sudo to container : https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
+#source code to create dockerfile: https://www.howtoforge.com/how-to-install-asterisk-17-on-ubuntu-2004/
 
 FROM ubuntu:20.04
 
