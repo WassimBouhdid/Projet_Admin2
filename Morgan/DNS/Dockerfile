@@ -4,6 +4,8 @@
 
 FROM resystit/bind9
 
-RUN apt-get install nano
+RUN apk update && \
+apk upgrade && \
+apk add bash
 
-copy named.conf /etc/bind/named.conf
+COPY named.conf /etc/bind/named.conf
