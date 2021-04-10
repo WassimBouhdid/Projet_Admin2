@@ -1,5 +1,5 @@
 from postfixadmin:3.3.7-apache
-RUN apt-get install nano
+RUN apt install nano
 #installation de la DB plus configuration
 run -e POSTFIXADMIN_DB_TYPE=mysqli \
            -e POSTFIXADMIN_DB_HOST=whatever \
