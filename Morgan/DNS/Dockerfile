@@ -1,11 +1,11 @@
-# https://hub.docker.com/r/resystit/bind9
+FROM debian:latest
 
-# docker run -d --name bind9 -p 53:53 -p 53:53/udp -v /absolute/path/named.conf:/etc/bind/named.conf -v /absolute/path/exemple.com.db:/etc/bind/exemple.com.db resystit/bind9:latest
+RUN apt-get update
+RUN apt-get upgrade -y
 
-FROM resystit/bind9
 
-RUN apk update && \
-apk upgrade && \
-apk add bash
+RUN apt install -y dnsutils
+RUN apt install -y bind9
 
 COPY named.conf /etc/bind/named.conf
+COPY l2-6.ephec-ti.be /etc/bind/l2-6.ephec-ti.be
