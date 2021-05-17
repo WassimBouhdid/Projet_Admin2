@@ -1,6 +1,6 @@
 $ORIGIN l2-6.ephec-ti.be.
 $TTL 3H 
-@       IN      SOA     ns.l2-6.ephec-ti.be. hostmaster.students.ephec.be. (
+@       IN      SOA     ns.l2-6.ephec-ti.be. he201896.students.ephec.be. (
                         0       ; serial
                         3H      ; refresh
                         1H      ; retry
