@@ -1,11 +1,11 @@
 $ORIGIN l2-6.ephec-ti.be.
 $TTL 3H 
 @       IN      SOA     ns.l2-6.ephec-ti.be. he201896.students.ephec.be. (
-                        0       ; serial
-                        3H      ; refresh
-                        1H      ; retry
-                        1W     	; expire
-			3H )	; minimum			
+                        1       ; Serial
+                        604800  ; Refresh
+                        86400   ; Retry
+                        2419200 ; Expire
+			604800 ); Negative Cache TTL			
 ;
 ; NS configs
             IN      NS      ns.l2-6.ephec-ti.be.
