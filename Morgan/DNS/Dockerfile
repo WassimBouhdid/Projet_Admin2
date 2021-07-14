@@ -1,13 +1,6 @@
-FROM debian:latest
+FROM resystit/bind9
 
-RUN apt-get update
-RUN apt-get upgrade -y
+COPY named.conf /etc/bind/named.conf
+COPY l2-6.ephec-ti.be /etc/bind/l2-6.ephec-ti.be
 
-
-RUN apt install -y dnsutils
-RUN apt install -y bind9
-
-#COPY named.conf /etc/bind/named.conf
-#COPY l2-6.ephec-ti.be /etc/bind/l2-6.ephec-ti.be
-
-#CMD ["named", "-c", "/etc/bind/named.conf", "-g"]
+CMD ["named", "-c", "/etc/bind/named.conf", "-g", "-u", "named"]

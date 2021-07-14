@@ -1,0 +1,36 @@
+
+*** These modified files were found in JOE when it aborted on Wed Jul 14 13:59:05 2021
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+:w
+w
+:q
+!w
+exit
+:exit
+:q
+
+*** File '(Unnamed)'
+/home/debian/Projet_Admin2/.git/COMMIT_EDITMSG
+
+*** File '/home/debian/Projet_Admin2/.git/COMMIT_EDITMSG'
+change image from debian to resystit
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: Debian <debian@vps-26066424.vps.ovh.net>
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   Dockerfile
+#	modified:   named.conf
+#
+
+*** File '* Startup Log *'
+Processing '/etc/joe/editorrc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
