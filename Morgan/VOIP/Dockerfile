@@ -1,48 +1,52 @@
 #source add sudo to container : https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
 #source code to create dockerfile: https://www.howtoforge.com/how-to-install-asterisk-17-on-ubuntu-2004/
+FROM ubuntu:latest
 
-FROM ubuntu:20.04
+RUN apt-get update -y
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install -y nano
 
-#basic config
-RUN apt-get update
-RUN apt-get upgrade -y 
-RUN apt-get update && \
-apt-get -y install sudo
-
-#https://community.asterisk.org/t/itu-t-telephone-code-and-docker/77303
-ENV DEBIAN_FRONTEND=noninteractive
+# Doc Asterisk : https://doc.ubuntu-fr.org/asterisk
+# Installation des dépendances
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+RUN apt install -y \
+  apt-utils \
+  build-essential \
+  wget \
+  openssl \
+  libxml2-dev \
+  libncurses5-dev \
+  uuid-dev \
+  sqlite3 \
+  libsqlite3-dev \
+  pkg-config \
+  libjansson-dev \
+  libedit-dev \
+  libssl-dev
 
-RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo && \
-apt -y install net-tools && \
-apt -y install iputils-ping && \ 
-apt -y install nano && \
-apt -y install software-properties-common && \
-apt -y install subversion && \
-apt -y install apt-utils && \ 
-echo "Europe/Brussels" | tee /etc/timezone
+RUN echo "Europe/Brussels" | tee /etc/timezone
+RUN dpkg-reconfigure --frontend noninteractive tzdata
 
-#install build dependencies
-RUN apt-get install gnupg2 software-properties-common git curl wget libnewt-dev libssl-dev libncurses5-dev subversion libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev -y
-
-#download asterisk 17 
-RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-17-current.tar.gz && \
-tar -xvzf asterisk-17-current.tar.gz && \
-cd asterisk-17*/ && \
-contrib/scripts/get_mp3_source.sh && \
-contrib/scripts/install_prereq install
-
-#build and install Asterisk on ubuntu
+# Installation d'Asterisk
+WORKDIR /usr/local/src/
+RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-16.9.0.tar.gz
+RUN tar -xvzf asterisk-16.9.0.tar.gz
+WORKDIR /usr/local/src/asterisk-16.9.0/
 RUN ./configure
 RUN make
 RUN make install
-RUN make samples
-#make config
+#décommenter la ligne suivante pour générer des fichies sample
+#RUN make samples
+RUN make config
 
+COPY ./config/ /etc/asterisk/
 
-#ports
-EXPOSE 2060/udp
-EXPOSE 2060/tcp
+#ports pour sip :
+EXPOSE 5060/udp
+EXPOSE 5060/tcp
+#ports pour rtp :
+EXPOSE 19000-20000/udp
 
-#run asterisk 18
-CMD ["asterisk"]
+#Run asterisk
+CMD ["asterisk", "-f"]
