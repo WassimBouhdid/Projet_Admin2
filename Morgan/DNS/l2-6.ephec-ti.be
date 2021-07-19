@@ -1,5 +1,5 @@
 $ORIGIN l2-6.ephec-ti.be.
-$TTL 3H 
+$TTL  604800
 @       IN      SOA     ns.l2-6.ephec-ti.be. he201896.students.ephec.be. (
                         1       ; Serial
                         604800  ; Refresh
