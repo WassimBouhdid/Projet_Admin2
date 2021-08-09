@@ -29,4 +29,5 @@ To run newest version:
         --volume /var/cache/bind \
         --volume /var/lib/bind \
         --volume /var/log \
-        isc:bind9`
+        isc:bind9
+        `
