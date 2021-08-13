@@ -1,46 +1,17 @@
 #source add sudo to container : https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
 #source code to create dockerfile: https://www.howtoforge.com/how-to-install-asterisk-17-on-ubuntu-2004/
-FROM ubuntu:latest
+FROM debian:latest
 
-RUN apt-get update -y
-RUN apt-get install -y net-tools
-RUN apt-get install -y iputils-ping
-RUN apt-get install -y nano
+RUN apt-get update \
+apt-get -y upgrade \
+apt-get -y install vim \
+apt-get -y install nano \
+apt-get -y install dnsutils \
+apt-get -y install  net-tools \
+apt-get -y install asterisk \
 
-# Doc Asterisk : https://doc.ubuntu-fr.org/asterisk
-# Installation des dépendances
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
-RUN apt install -y \
-  apt-utils \
-  build-essential \
-  wget \
-  openssl \
-  libxml2-dev \
-  libncurses5-dev \
-  uuid-dev \
-  sqlite3 \
-  libsqlite3-dev \
-  pkg-config \
-  libjansson-dev \
-  libedit-dev \
-  libssl-dev
-
+#change timezone
 RUN echo "Europe/Brussels" | tee /etc/timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
-
-# Installation d'Asterisk
-WORKDIR /usr/local/src/
-RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-16.9.0.tar.gz
-RUN tar -xvzf asterisk-16.9.0.tar.gz
-WORKDIR /usr/local/src/asterisk-16.9.0/
-RUN ./configure
-RUN make
-RUN make install
-#décommenter la ligne suivante pour générer des fichies sample
-#RUN make samples
-RUN make config
-
-COPY ./config/ /etc/asterisk/
 
 #ports pour sip :
 EXPOSE 5060/udp
