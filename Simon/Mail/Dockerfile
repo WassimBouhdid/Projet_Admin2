@@ -16,16 +16,16 @@ RUN apt update
 RUN apt-get install mariadb-server -y
 
 
-COPY myscript/* /usr/bin/
-RUN chmod +x /usr/bin/addmailusers
-RUN chmod +x /usr/bin/delmailusers
-RUN chmod +x /usr/bin/showmailusers
-RUN chmod +x /usr/bin/readmailadmins
-RUN chmod +x /usr/bin/readmailusers
+COPY db/* /usr/bin/
+RUN chmod +x /usr/bin/AddUsers
+RUN chmod +x /usr/bin/dellUsers
+RUN chmod +x /usr/bin/showUser
+RUN chmod +x /usr/bin/readAdmin
+RUN chmod +x /usr/bin/readUsers
 
 #Configuration - MariaDB
 
-COPY config-db/createBD.sql config-sql/createDB.sql
+COPY config-db/createDB.sql config-sql/createDB.sql
 COPY config-db/createUsers.sql config-sql/createUsers.sql
 
 
@@ -67,14 +67,14 @@ RUN chown -R vhosts:vhosts /var/lib/dovecot/sieve/*
 RUN chmod a+x /var/lib/dovecot
 
 #SPF
-RUN apt install postfix-policyd-spf-python
+RUN apt install postfix-policyd-spf-python -y
 COPY configSpfDkimDmarc/master.cf /etc/postfix/master.cf
 COPY configSpfDkimDmarc/main.cf /etc/postfix/main.cf
 
 # Installation de DKIM / DMARC 
-RUN apt-get install opendkim opendkim-tools
+RUN apt-get install opendkim opendkim-tools -y
 RUN gpasswd -a postfix opendkim
-RUN apt-get install opendmarc
+RUN apt-get install opendmarc -y  
 COPY configSpfDkimDmarc/opendkim.conf /etc/opendkim.conf
 RUN mkdir /etc/opendkim
 RUN mkdir /etc/opendkim/keys
