@@ -14,4 +14,4 @@ EXPOSE 5060/tcp
 #ports pour rtp :
 EXPOSE 19000-20000/udp
 #Run asterisk
-#CMD ["asterisk", "-f"]
+CMD ["asterisk", "-f"]
