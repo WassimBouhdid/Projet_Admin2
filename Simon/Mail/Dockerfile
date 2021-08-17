@@ -74,7 +74,7 @@ COPY configSpfDkimDmarc/main.cf /etc/postfix/main.cf
 # Installation de DKIM / DMARC 
 RUN apt-get install opendkim opendkim-tools -y
 RUN gpasswd -a postfix opendkim
-RUN apt-get install opendmarc -y  
+RUN apt-get install dialog apt-utils -y  
 COPY configSpfDkimDmarc/opendkim.conf /etc/opendkim.conf
 RUN mkdir /etc/opendkim
 RUN mkdir /etc/opendkim/keys
@@ -83,10 +83,10 @@ RUN chmod go-rw /etc/opendkim/keys
 COPY configSpfDkimDmarc/signing.table /etc/opendkim/signing.table
 COPY configSpfDkimDmarc/key.table /etc/opendkim/key.table
 COPY configSpfDkimDmarc/trusted.hosts /etc/opendkim/trusted.hosts
-RUN mkdir /etc/opendkim/keys/l2-5.ephec-ti.be
-RUN opendkim-genkey -b 2048 -d l2-5.ephec-ti.be -D /etc/opendkim/keys/l2-5.ephec-ti.be -s default -v
+RUN mkdir /etc/opendkim/keys/l2-6.ephec-ti.be
+RUN opendkim-genkey -b 2048 -d l2-6.ephec-ti.be -D /etc/opendkim/keys/l2-6.ephec-ti.be -s default -v
 RUN chown opendkim:opendkim /etc/opendkim/keys/l2-5.ephec-ti.be/default.private
-RUN cat /etc/opendkim/keys/l2-5.ephec-ti.be/default.txt
+RUN cat /etc/opendkim/keys/l2-6.ephec-ti.be/default.txt
 
 
 
