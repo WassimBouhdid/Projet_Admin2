@@ -13,5 +13,10 @@ EXPOSE 5060/udp
 EXPOSE 5060/tcp
 #ports pour rtp :
 EXPOSE 19000-20000/udp
+#copy config files
+COPY config/sip.conf /etc/asterisk/sip.conf
+COPY config/extensions.conf /etc/asterisk/extensions.conf
+COPY config/voicemail.conf /etc/asterisk/voicemail.conf
 #Run asterisk
+ENTRYPOINT [ "/usr/sbin/asterisk", "-f" ]
 #CMD ["asterisk", "-f"]
