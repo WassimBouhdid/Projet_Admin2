@@ -69,3 +69,15 @@ RUN chmod a+x /var/lib/dovecot
 
 # lance le docker
 CMD ["sh", "-c", "service mysql start; mysql -u root < config-sql/create-db.sql; mysql -u root < config-sql/create-users.sql; service postfix start; service dovecot start; tail -F /var/log/mail.log"]
+
+#port smtp
+EXPOSE 25/tcp
+EXPOSE 587/tcp
+
+#port imap
+EXPOSE 142/tcp
+EXPOSE 993/tcp
+
+#port db
+EXPOSE 3306/tcp
+EXPOSE 5000/tcp
