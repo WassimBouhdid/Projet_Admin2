@@ -1,0 +1,16 @@
+[DEFAULT]
+
+ignoreip = 127.0.0.1/8 135.125.101.188 135.125.101.238 51.210.4.175
+
+bantime = 86400
+maxretry = 5
+
+#banaction = iptables
+#protocol = all
+
+[asterisk]
+enabled = true
+port = 5060,5061
+#action = find what cmd iptables takes
+logpath = /home/debian/fail2ban/logs/messages
+maxretry = 5
