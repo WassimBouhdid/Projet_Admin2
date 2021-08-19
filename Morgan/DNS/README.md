@@ -19,16 +19,5 @@ Test
 
 To run newest version:
 
-`docker run \
-        --name=bind9 \
-        --restart=always \
-        --publish 53:53/udp \
-        --publish 53:53/tcp \
-        --publish 127.0.0.1:953:953/tcp \
-        --volume /etc/bind \
-        --volume /var/cache/bind \
-        --volume /var/lib/bind \
-        --volume /var/log \
-        -d \
-        isc:bind9
+`docker run --name=bind9 --restart=always --publish 53:53/udp --publish 53:53/tcp --publish 127.0.0.1:953:953/tcp --volume /etc/bind --volume /var/cache/bind --volume /var/lib/bind --volume /var/log -d bind:soaext 
         `
